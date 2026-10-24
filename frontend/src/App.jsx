@@ -8,14 +8,14 @@ function App() {
   const wsRef = useRef(null);
 
   const createRoom = () => {
-    const id = 'room_' + Math.random().toString(36).substring(2, 8);
+    const id = 'AL-FS-05';
     setRoomId(id);
     joinRoom(id);
   };
 
   const joinRoom = async (id) => {
-    const targetRoom = id || roomId;
-    if(!targetRoom) return alert('Room ID pettu');
+    const targetRoom = id || roomId || 'AL-FS-05';
+    if(!targetRoom) return alert('Enter Room ID ');
     try {
       const res = await fetch('http://localhost:3001/api/tickets', { method: 'POST' });
       const data = await res.json();
@@ -54,14 +54,14 @@ function App() {
 
   if(!inRoom){
     return (
-      <div style={{ padding: '40px', fontFamily: 'sans-serif', textAlign: 'center' }}>
-        <h1>LiveRoom AL-FS-05</h1>
-        <p style={{ color: 'green', fontWeight: 'bold' }}>Backend OK - Ready</p>
-        <button onClick={createRoom} style={{ padding: '14px 28px', margin: '10px', background: '#0070f3', color: 'white', border: 'none', borderRadius: '10px', fontSize: '16px', cursor: 'pointer' }}>Create Room</button>
+      <div style={{ padding: '40px', fontFamily: 'sans-serif', textAlign: 'center', background: '#111', color: 'white', minHeight: '100vh' }}>
+        <h1 style={{ fontSize: '36px', fontWeight: 'bold' }}>LiveRoom AL-FS-05</h1>
+        <button onClick={createRoom} style={{ padding: '14px 28px', margin: '20px 10px', background: '#0070f3', color: 'white', border: 'none', borderRadius: '10px', fontSize: '16px', cursor: 'pointer' }}>Create Room</button>
         <div>
-          <input value={roomId} onChange={e=>setRoomId(e.target.value)} placeholder="Room ID" style={{ padding: '12px', margin: '10px', borderRadius: '8px', border: '1px solid #ccc' }}/>
-          <button onClick={()=>joinRoom()} style={{ padding: '12px 20px', borderRadius: '8px' }}>Join Room</button>
+          <input value={roomId} onChange={e=>setRoomId(e.target.value)} placeholder="AL-FS-05" style={{ padding: '12px', margin: '10px', borderRadius: '8px', border: '1px solid #ccc', color: 'black' }}/>
+          <button onClick={()=>joinRoom()} style={{ padding: '12px 20px', borderRadius: '8px', cursor: 'pointer' }}>Join Room</button>
         </div>
+        <p style={{ marginTop: '20px', fontSize: '12px', color: '#888' }}>Task ID: AL-FS-05 | Room: {roomId || 'AL-FS-05'}</p>
       </div>
     )
   }
